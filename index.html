@@ -9,6 +9,9 @@
         height: 500px;
         margin: auto;
       }
+      .clickable {
+        cursor: pointer;
+      }
       img {
         height: auto;
         width: 100%;
@@ -32,8 +35,12 @@
 
       </div>
       <div class="box-info" style="font-size: 36px; text-align: center;">
+        <span class="clickable" onclick="prevBox()"><<</span>
         Box #<span id="box"></span>
+        <span class="clickable" onclick="nextBox()">>></span>
+
       </div>
+
 
     </div>
   </body>
@@ -44,19 +51,19 @@
       $('#big-img').html('<img src="' + window.hashList[window.currentBox] + '">')
       $("#box").html(window.currentBox)
     }
-    var prevBox = function() {
+    prevBox = function() {
       if (window.currentBox > 1) {
         window.currentBox -= 1;
         swapPic();
       }
     }
-    var nextBox = function() {
+    nextBox = function() {
       if (window.currentBox < window.hashList.length - 1) {
         window.currentBox += 1;
         swapPic();
       }
     }
-    var goToBox = function(box) {
+    goToBox = function(box) {
       box = parseInt(box)
       if (box > 1 && box < 120) {
         this.currentBox = box;
