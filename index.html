@@ -6,6 +6,7 @@
     <style media="screen">
       .big-img-container {
         width: 600px;
+        height: 500px;
         margin: auto;
       }
       img {
@@ -18,6 +19,9 @@
       }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="./what.js">
+
+    </script>
   </head>
   <body>
     <div class="name" id="password-container" style="display:none;">
@@ -27,24 +31,37 @@
       <div class="big-img-container" id="big-img">
 
       </div>
-      <div class="url-info">
-        URL: <br>
-        <span id="url"></span>
+      <div class="box-info" style="font-size: 36px; text-align: center;">
+        Box #<span id="box"></span>
       </div>
 
     </div>
   </body>
 
   <script type="text/javascript">
-    window.pics = [];
-    for (var i = 1187; i <= 1451; i++) {
-      window.pics.push(i)
-    }
-    window.currentIndex = 1308-1187 + 1;
+    window.currentBox = 1;
     var swapPic = function() {
-      url = 'https://s3.amazonaws.com/sally-jenkins-jewelry/DSCN' + window.pics[window.currentIndex] + '.JPG';
-      $('#big-img').html('<img src="' + url + '">')
-      $("#url").html(url)
+      $('#big-img').html('<img src="' + window.hashList[window.currentBox] + '">')
+      $("#box").html(window.currentBox)
+    }
+    var prevBox = function() {
+      if (window.currentBox > 1) {
+        window.currentBox -= 1;
+        swapPic();
+      }
+    }
+    var nextBox = function() {
+      if (window.currentBox < window.hashList.length - 1) {
+        window.currentBox += 1;
+        swapPic();
+      }
+    }
+    var goToBox = function(box) {
+      box = parseInt(box)
+      if (box > 1 && box < 120) {
+        this.currentBox = box;
+        swapPic();
+      }
     }
     $(function() {
       swapPic();
@@ -52,15 +69,9 @@
     $('body').on('keyup', function(e) {
       if (e.keyCode === 37) {
         e.preventDefault();
-        if (window.currentIndex > -1) {
-          window.currentIndex -= 1;
-          swapPic();
-        }
+        prevBox()
       } else if (e.keyCode === 39) {
-        if (window.currentIndex < window.pics.length - 1) {
-          window.currentIndex += 1;
-          swapPic();
-        }
+        nextBox(0)
       } else {
       }
     })
