@@ -37,7 +37,7 @@
 
   <script type="text/javascript">
     window.pics = [];
-    for (var i = 1187; i <= 1444; i++) {
+    for (var i = 1187; i <= 1451; i++) {
       window.pics.push(i)
     }
     window.currentIndex = 1308-1187 + 1;
@@ -57,7 +57,7 @@
           swapPic();
         }
       } else if (e.keyCode === 39) {
-        if (window.currentIndex < window.pics.length) {
+        if (window.currentIndex < window.pics.length - 1) {
           window.currentIndex += 1;
           swapPic();
         }
